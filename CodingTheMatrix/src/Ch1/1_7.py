@@ -52,6 +52,9 @@ def myUnion(L):
             current = current | x
     return current
 
+def transform(a,b,L):
+    return
+
 if __name__ == '__main__':
     print('paragraph 1.7')
     print('1.7.1')

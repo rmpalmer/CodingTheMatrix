@@ -53,7 +53,7 @@ def myUnion(L):
     return current
 
 def transform(a,b,L):
-    return
+    return [a*z+b for z in L]
 
 if __name__ == '__main__':
     print('paragraph 1.7')
@@ -79,3 +79,7 @@ if __name__ == '__main__':
     mysets = [{1,5,6},{1,7,9},{11,5,7}]
     print(mysets)
     print(myUnion(mysets))
+    print('1.7.12')
+    myComplex=[(1+0j),(0+1j),(-1+0j),(0-1j)]
+    print(myComplex)
+    print(transform((1+1j),(2+2j),myComplex))

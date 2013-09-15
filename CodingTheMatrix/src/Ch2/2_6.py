@@ -12,6 +12,6 @@ def segment(pt1,pt2,n):
 if __name__ == '__main__':
     pt1 = [3.5,3]
     pt2 = [0.5, 1]
-    seg = segment(pt1,pt2,10)
+    seg = segment(pt1,pt2,30)
     print(seg)
-    plot(seg,4)
+    plot(seg,4,3,'firefox')

@@ -17,7 +17,6 @@ def most_similar(sen, voting_dict):
         name = item[0]
         if (name == sen):
             continue
-        votes = item[1]
         sim = policy_compare(sen, name, voting_dict)
         #print(name, sim)
         if ((candidate == "") or (sim > best)):
@@ -32,7 +31,6 @@ def least_similar(sen,voting_dict):
         name = item[0]
         if (name == sen):
             continue
-        votes = item[1]
         sim = policy_compare(sen, name, voting_dict)
         #print(name, sim)
         if ((candidate == "") or (sim < best)):

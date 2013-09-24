@@ -133,7 +133,8 @@ def dot(u,v):
     12
     """
     assert u.D == v.D
-    pass
+    allkeys=set(u.f.keys()) & set(v.f.keys())
+    return sum ([u[k]*v[k] for k in allkeys])
 
 def scalar_mul(v, alpha):
     """
@@ -148,7 +149,7 @@ def scalar_mul(v, alpha):
    >>> 0.5*u == Vec({'x','y','z','w'},{'x':0.5,'y':1,'z':1.5,'w':2})
    True
     """
-    pass
+    return Vec(v.D,{k:v*alpha for (k,v)  in v.f.items()})
 
 def neg(v):
     """
@@ -158,7 +159,7 @@ def neg(v):
     >>> neg(u)
     Vec({8, 2, 4, 6},{8: -4, 2: -1, 4: -2, 6: -3})
     """
-    pass
+    return scalar_mul(v,-1)
 
 ###############################################################################################################################
 
@@ -195,20 +196,20 @@ class Vec:
         if other == 0:
             return self
     
-    def __sub__(a,b):
-         "Returns a vector which is the difference of a and b."
-         return a+(-b)
+    def __sub__(self,other):
+        "Returns a vector which is the difference of a and b."
+        return self+(-other)
 
     __eq__ = equal
 
-    def __str__(v):
+    def __str__(self):
         "pretty-printing"
-        D_list = sorted(v.D, key=repr)
+        D_list = sorted(self.D, key=repr)
         numdec = 3
-        wd = dict([(k,(1+max(len(str(k)), len('{0:.{1}G}'.format(v[k], numdec))))) if isinstance(v[k], int) or isinstance(v[k], float) else (k,(1+max(len(str(k)), len(str(v[k]))))) for k in D_list])
-        # w = 1+max([len(str(k)) for k in D_list]+[len('{0:.{1}G}'.format(value,numdec)) for value in v.f.values()])
+        wd = dict([(k,(1+max(len(str(k)), len('{0:.{1}G}'.format(self[k], numdec))))) if isinstance(self[k], int) or isinstance(self[k], float) else (k,(1+max(len(str(k)), len(str(self[k]))))) for k in D_list])
+        # w = 1+max([len(str(k)) for k in D_list]+[len('{0:.{1}G}'.format(selfalue,numdec)) for value in self.f.values()])
         s1 = ''.join(['{0:>{1}}'.format(k,wd[k]) for k in D_list])
-        s2 = ''.join(['{0:>{1}.{2}G}'.format(v[k],wd[k],numdec) if isinstance(v[k], int) or isinstance(v[k], float) else '{0:>{1}}'.format(v[k], wd[k]) for k in D_list])
+        s2 = ''.join(['{0:>{1}.{2}G}'.format(self[k],wd[k],numdec) if isinstance(self[k], int) or isinstance(self[k], float) else '{0:>{1}}'.format(self[k], wd[k]) for k in D_list])
         return "\n" + s1 + "\n" + '-'*sum(wd.values()) +"\n" + s2
 
     def __repr__(self):

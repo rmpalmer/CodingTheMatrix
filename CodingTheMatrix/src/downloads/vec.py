@@ -19,7 +19,10 @@ def getitem(v,k):
     >>> v['b']
     0
     """
-    pass
+    if k in v.f:
+        return v.f[k]
+    else:
+        return 0
 
 def setitem(v,k,val):
     """
@@ -35,7 +38,7 @@ def setitem(v,k,val):
     >>> v['a']
     1
     """
-    pass
+    v.f[k] = val
 
 def equal(u,v):
     """
@@ -65,7 +68,14 @@ def equal(u,v):
 
     """
     assert u.D == v.D
-    pass
+    same = True
+    for k in set(u.f.keys()).union(v.f.keys()):
+        if u[k] != v[k]:
+            same = False
+            break
+        else:
+            print(k,u[k],v[k])
+    return same
 
 def add(u,v):
     """
@@ -95,7 +105,8 @@ def add(u,v):
     True
     """
     assert u.D == v.D
-    pass
+    allkeys = set(u.f.keys()).union(v.f.keys())
+    return Vec(u.D,{k:u[k]+v[k] for k in allkeys})
 
 def dot(u,v):
     """
